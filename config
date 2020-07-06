@@ -1,0 +1,96 @@
+{
+    "layer": "top",
+    "position": "top",
+    /*"height": 23,*/
+    /*"width": 1280,*/
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": [],
+    "modules-right": ["custom/media", "pulseaudio", "network", "idle_inhibitor",
+    "backlight", "custom/battery", "clock", "tray", "custom/keyboard"],
+
+    "sway/workspaces": {
+        /*"disable-scroll": true,*/
+        "all-outputs": false,
+	"persistent_workspaces": {
+	    "1": []
+	},
+        "format": "{name}",
+        "format-icons": {
+	    "1": "",
+            /*"2": "",*/
+            /*"3": "",*/
+            "10": "",
+            /*"5": "",*/
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+    "sway/window": {
+            /*"max-length": 20*/
+    },
+    "sway/mode": {
+        /*"format": "<span style=\"italic\">{}</span>"*/
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+	/*"icon-size": 21,*/
+	"spacing": 10
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%H:%M - %d %h %Y}",
+	      "on-click-right": "minetime"
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""],
+	      "on-click": "light -U 2",
+	      "on-click-right": "light -A 2"
+    },
+    "network": {
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "!",
+        "format-alt": "{essid}: {ipaddr}",
+	      "interval": 10,
+	      "on-click-right": "termite -e \"sudo wifi-menu -o\""
+    },
+    "pulseaudio": {
+				"scroll-step": 2, // %, can be a float
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}: {icon}",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": "",
+	      "format-source": "{volume}% ",
+	      "format-source-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol -t 3",
+        "on-click-right": "pactl set-sink-mute 0 toggle"
+    },
+    "custom/battery": {
+    		"exec": "runghc /home/romeo/programming/acpi/main.hs",
+    		"interval": 60,
+    		"format" : "{icon} {}{percentage}",
+    		"escape" : true,
+    		"return-type" : "json",
+    		"format-icons": [""]
+    }
+}
+// vi:syntax=javascript
